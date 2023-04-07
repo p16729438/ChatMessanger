@@ -17,7 +17,7 @@ public class ClientOutputThread extends Thread {
     public void run() {
         try {
             DataOutputStream dos = new DataOutputStream(connectThread.getSocket().getOutputStream());
-            while (!isInterrupted()) {
+            while (!connectThread.isInterrupted() && !isInterrupted()) {
                 if (!messageQueue.isEmpty()) {
                     dos.writeUTF(messageQueue.get(0));
                     dos.flush();

@@ -2,12 +2,12 @@ package com.p16729438.ChatMessanger.GUI.ChatGUI;
 
 import java.awt.Color;
 import java.io.IOException;
-import java.net.URL;
 
 import javax.imageio.ImageIO;
 import javax.swing.JFrame;
 
 import com.p16729438.ChatMessanger.ChatMessanger;
+import com.p16729438.ChatMessanger.Main;
 import com.p16729438.ChatMessanger.GUI.ChatGUI.Component.ClientList.ClientListScrollPane;
 import com.p16729438.ChatMessanger.GUI.ChatGUI.Component.Input.InputTextField;
 import com.p16729438.ChatMessanger.GUI.ChatGUI.Component.Output.OutputScrollPane;
@@ -38,7 +38,7 @@ public class ChatGUI extends JFrame {
         setResizable(false);
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         try {
-            setIconImage(ImageIO.read(new URL("http://16729438.kro.kr/files/chat.png")));
+            setIconImage(ImageIO.read(Main.class.getResourceAsStream("com/p16729438/ChatMessanger/chat.png")));
         } catch (IOException e) {
         }
         getContentPane().setBackground(Color.DARK_GRAY);

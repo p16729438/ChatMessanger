@@ -21,7 +21,7 @@ public class ServerOutputThread extends Thread {
     public void run() {
         try {
             DataOutputStream dos = new DataOutputStream(socket.getOutputStream());
-            while (!isInterrupted()) {
+            while (!hostThread.isInterrupted() && !isInterrupted()) {
                 if (!messageQueue.isEmpty()) {
                     dos.writeUTF(messageQueue.get(0));
                     dos.flush();
