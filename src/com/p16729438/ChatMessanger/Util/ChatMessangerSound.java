@@ -19,8 +19,8 @@ public class ChatMessangerSound {
                     Main.class.getResourceAsStream("/com/p16729438/ChatMessanger/notification_sound.wav")));
             clip.open(ais);
             clip.start();
-        } catch (LineUnavailableException | UnsupportedAudioFileException | IOException exception) {
-            exception.printStackTrace();
+        } catch (LineUnavailableException | UnsupportedAudioFileException | IOException e) {
+            e.printStackTrace();
         }
     }
 }

@@ -27,6 +27,21 @@ public class Client {
         }
     }
 
+    public Client(ChatMessanger chatMessanger, String address, int port) {
+        this.chatMessanger = chatMessanger;
+        connectThread = new ClientConnectThread(this);
+        connectThread.setAddress(address);
+        connectThread.setPort(port);
+        connectThread.start();
+        while (!connectThread.isReady()) {
+            try {
+                Thread.sleep(1000);
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            }
+        }
+    }
+
     public ClientConnectThread getConnectThread() {
         return connectThread;
     }

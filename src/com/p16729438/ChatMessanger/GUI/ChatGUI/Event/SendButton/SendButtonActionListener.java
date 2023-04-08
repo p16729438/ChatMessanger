@@ -39,7 +39,7 @@ public class SendButtonActionListener implements ActionListener {
                 String str = sendButton.getChatGUI().getInputTextField().getText();
                 if (!str.equalsIgnoreCase("")) {
                     sendButton.getChatGUI().getOutputScrollPane().getOutputTextArea().appendText(str);
-                    sendButton.getChatGUI().getChatMessanger().getServer().getServerHostThread()
+                    sendButton.getChatGUI().getChatMessanger().getServer().getHostThread()
                             .sendChat("Server;" + str);
                     sendButton.getChatGUI().getInputTextField().setText(null);
                 }

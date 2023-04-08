@@ -39,7 +39,7 @@ public class Server {
         }
     }
 
-    public ServerHostThread getServerHostThread() {
+    public ServerHostThread getHostThread() {
         return hostThread;
     }
 

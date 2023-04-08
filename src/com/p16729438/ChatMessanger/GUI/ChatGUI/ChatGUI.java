@@ -13,7 +13,6 @@ import com.p16729438.ChatMessanger.GUI.ChatGUI.Component.Input.InputTextField;
 import com.p16729438.ChatMessanger.GUI.ChatGUI.Component.Output.OutputScrollPane;
 import com.p16729438.ChatMessanger.GUI.ChatGUI.Component.SendButton.SendButton;
 import com.p16729438.ChatMessanger.GUI.ChatGUI.Event.ChatGUI.ChatGUIMouseListener;
-import com.p16729438.ChatMessanger.GUI.ChatGUI.Event.ChatGUI.ChatGUIWindowListener;
 import com.p16729438.ChatMessanger.Util.ChatMessangerFont;
 
 public class ChatGUI extends JFrame {
@@ -57,7 +56,6 @@ public class ChatGUI extends JFrame {
         getRootPane().setDefaultButton(sendButton);
 
         addMouseListener(new ChatGUIMouseListener(this));
-        addWindowListener(new ChatGUIWindowListener(this));
 
         setVisible(true);
     }

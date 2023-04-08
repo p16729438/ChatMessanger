@@ -12,7 +12,6 @@ import com.p16729438.ChatMessanger.Client.Client;
 import com.p16729438.ChatMessanger.GUI.ChatGUI.ChatGUI;
 import com.p16729438.ChatMessanger.GUI.SelectGUI.SelectGUI;
 import com.p16729438.ChatMessanger.Server.Server;
-import com.p16729438.ChatMessanger.Server.Command.ClearCommand;
 
 public class ChatMessanger {
     private boolean usingGUI = true;
@@ -34,8 +33,7 @@ public class ChatMessanger {
         } catch (HeadlessException e) {
             usingGUI = false;
             if (isLatestVersion()) {
-                selectPort();
-                input();
+                selectOption();
             }
         }
     }
@@ -83,43 +81,91 @@ public class ChatMessanger {
         return true;
     }
 
-    private void selectPort() {
-        System.out.print("포트 번호 입력: ");
+    private void selectOption() {
+        System.out.println("옵션 선택(Client: c, Server: s, exit: any Key): ");
         sc = new Scanner(System.in);
+        String option = sc.nextLine();
+        if (option.equalsIgnoreCase("c")) {
+            selectClientAddress();
+            input();
+        } else if (option.equalsIgnoreCase("s")) {
+            selectServerPort();
+            input();
+        }
+    }
+
+    private void selectClientAddress() {
+        System.out.println("IP 주소 입력: ");
+        String address = sc.nextLine();
+        selectClientPort(address);
+    }
+
+    private void selectClientPort(String address) {
+        System.out.print("포트 번호 입력: ");
+        try {
+            int port = sc.nextInt();
+            if (port >= 0 && port <= 65535) {
+                client = new Client(this, address, port);
+            } else {
+                System.out.println("숫자만 입력하세요 (범위: 0~65535)");
+                selectClientPort(address);
+            }
+        } catch (InputMismatchException e) {
+            System.out.println("숫자만 입력하세요 (범위: 0~65535)");
+            selectClientPort(address);
+        }
+    }
+
+    private void selectServerPort() {
+        System.out.print("포트 번호 입력: ");
         try {
             int port = sc.nextInt();
             if (port >= 0 && port <= 65535) {
                 server = new Server(this, port);
             } else {
                 System.out.println("숫자만 입력하세요 (범위: 0~65535)");
-                selectPort();
+                selectServerPort();
             }
         } catch (InputMismatchException e) {
             System.out.println("숫자만 입력하세요 (범위: 0~65535)");
-            selectPort();
+            selectServerPort();
         }
     }
 
-    private void input() {
+    public void input() {
         String str;
         while ((str = sc.nextLine()) != null) {
-            if (str.startsWith("/")) {
-                if (str.split(" ", -1)[0].equalsIgnoreCase("/clear")) {
-                    if (str.split(" ").length == 1) {
-                        // clear;
-                        new ClearCommand(this);
+            if (client != null) {
+                if (str.startsWith("/")) {
+                    if (str.split(" ", -1)[0].equalsIgnoreCase("/clear")) {
+                        if (str.split(" ").length == 1) {
+                            // new ClearCommand(this).execute();
+                        }
+                    }
+                } else {
+                    if (!str.equalsIgnoreCase("")) {
+                        client.getConnectThread().sendChat(str);
                     }
                 }
-                if (str.split(" ", -1)[0].equalsIgnoreCase("/setmanager")) {
+            } else if (server != null) {
+                if (str.startsWith("/")) {
+                    if (str.split(" ", -1)[0].equalsIgnoreCase("/clear")) {
+                        if (str.split(" ").length == 1) {
+                            // new ClearCommand(this).execute();
+                        }
+                    }
+                    if (str.split(" ", -1)[0].equalsIgnoreCase("/setmanager")) {
 
-                }
-            } else {
-                if (!str.equalsIgnoreCase("")) {
-                    server.getServerHostThread().sendChat("Server;" + str);
+                    }
+                } else {
+                    if (!str.equalsIgnoreCase("")) {
+                        server.getHostThread().sendChat("Server;" + str);
+                    }
                 }
             }
         }
         sc.close();
+        sc = null;
     }
 
     public void output(String str) {
@@ -158,6 +204,10 @@ public class ChatMessanger {
 
     public void setReadyGUI(boolean readyGUI) {
         this.readyGUI = readyGUI;
+    }
+
+    public Scanner getScanner() {
+        return sc;
     }
 
     public boolean readyGUI() {

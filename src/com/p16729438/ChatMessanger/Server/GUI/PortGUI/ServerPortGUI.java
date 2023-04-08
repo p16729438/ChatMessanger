@@ -25,7 +25,7 @@ public class ServerPortGUI extends JOptionPane {
         setVisible(true);
 
         int port = selectPort();
-        server.getServerHostThread().setPort(port);
+        server.getHostThread().setPort(port);
     }
 
     private int selectPort() {

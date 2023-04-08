@@ -34,22 +34,23 @@ public class ClientConnectThread extends Thread {
     @Override
     public void run() {
         try {
-            client.getChatMessanger().getChatGUI().getOutputScrollPane().getOutputTextArea()
-                    .appendText("(IP 주소: " + address + ":" + port + "): 연결 시도");
+            client.getChatMessanger().output("(IP 주소: " + address + ":" + port + "): 연결 시도");
             socket = new Socket(address, port);
             ready = true;
-            client.getChatMessanger().getChatGUI().getOutputScrollPane().getOutputTextArea()
-                    .appendText("(IP 주소: " + address + ":" + port + "): 연결됨");
+            client.getChatMessanger().output("(IP 주소: " + address + ":" + port + "): 연결됨");
             inputThread = new ClientInputThread(this);
             outputThread = new ClientOutputThread(this);
             inputThread.start();
             outputThread.start();
             checkThread = new ClientCheckThread(this);
             checkThread.start();
-            new NicknameGUI(client);
+            if (client.getChatMessanger().usingGUI()) {
+                new NicknameGUI(client);
+            } else {
+                inputNickname();
+            }
         } catch (IOException e) {
-            client.getChatMessanger().getChatGUI().getOutputScrollPane().getOutputTextArea()
-                    .appendText("(IP 주소:" + address + ":" + port + "): 연결 실패");
+            client.getChatMessanger().output("(IP 주소:" + address + ":" + port + "): 연결 실패");
         }
     }
 
@@ -89,10 +90,15 @@ public class ClientConnectThread extends Thread {
             nickname = requestNickname;
             requestingNickname = false;
             requestNickname = null;
-            client.getChatMessanger().getChatGUI().getClientListScrollPane().getClientList().setClient(nickname);
-            client.getChatMessanger().getChatGUI().getOutputScrollPane().getOutputTextArea()
-                    .appendText("닉네임을 " + nickname + "(으)로 설정했습니다.");
-            ChatMessangerData.setNicknameData(nickname);
+            if (client.getChatMessanger().usingGUI()) {
+                client.getChatMessanger().getChatGUI().getClientListScrollPane().getClientList().setClient(nickname);
+            }
+            client.getChatMessanger().output("닉네임을 " + nickname + "(으)로 설정했습니다.");
+            if (client.getChatMessanger().usingGUI()) {
+                ChatMessangerData.setNicknameData(nickname);
+            } else {
+                client.getChatMessanger().input();
+            }
         }
         client.getChatMessanger().setReadyGUI(true);
     }
@@ -104,19 +110,29 @@ public class ClientConnectThread extends Thread {
     public void clearRequestNickname() {
         requestingNickname = false;
         requestNickname = null;
-        new NicknameGUI(client);
+        if (client.getChatMessanger().usingGUI()) {
+            new NicknameGUI(client);
+        } else {
+            inputNickname();
+        }
     }
 
-    public void requestNickname(String str) {
+    public void requestNickname(String nickname) {
         if (!requestingNickname) {
             requestingNickname = true;
-            requestNickname = str;
-            outputThread.addMessageQueue("nickname;" + str);
+            requestNickname = nickname;
+            outputThread.addMessageQueue("nickname;" + nickname);
         }
     }
 
     public boolean isRequestingNickname() {
         return requestingNickname;
+    }
+
+    private void inputNickname() {
+        System.out.println("닉네임 입력: ");
+        String nickname = client.getChatMessanger().getScanner().nextLine();
+        requestNickname(nickname);
     }
 
     public Client getClient() {

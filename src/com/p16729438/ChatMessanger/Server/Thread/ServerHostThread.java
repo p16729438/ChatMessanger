@@ -98,6 +98,7 @@ public class ServerHostThread extends Thread {
             }
         }
         addChatRecord(chatRecord);
+        server.getChatMessanger().output(chatRecord);
         for (Socket socket : outputThreads.keySet()) {
             outputThreads.get(socket).addMessageQueue(chat);
         }
@@ -206,12 +207,6 @@ public class ServerHostThread extends Thread {
     public ArrayList<Socket> getSocketList() {
         return socketList;
     }
-
-    /*
-     * public Socket getSocket(long id) {
-     * return sockets.get(id);
-     * }
-     */
 
     public boolean isReady() {
         return ready;
