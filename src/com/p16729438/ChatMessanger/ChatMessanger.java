@@ -5,7 +5,6 @@ import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.net.URL;
-import java.util.InputMismatchException;
 import java.util.Scanner;
 
 import com.p16729438.ChatMessanger.Client.Client;
@@ -103,14 +102,14 @@ public class ChatMessanger {
     private void selectClientPort(String address) {
         System.out.print("포트 번호 입력: ");
         try {
-            int port = sc.nextInt();
+            int port = Integer.parseInt(sc.nextLine());
             if (port >= 0 && port <= 65535) {
                 client = new Client(this, address, port);
             } else {
                 System.out.println("숫자만 입력하세요 (범위: 0~65535)");
                 selectClientPort(address);
             }
-        } catch (InputMismatchException e) {
+        } catch (NumberFormatException e) {
             System.out.println("숫자만 입력하세요 (범위: 0~65535)");
             selectClientPort(address);
         }
@@ -119,14 +118,14 @@ public class ChatMessanger {
     private void selectServerPort() {
         System.out.print("포트 번호 입력: ");
         try {
-            int port = sc.nextInt();
+            int port = Integer.parseInt(sc.nextLine());
             if (port >= 0 && port <= 65535) {
                 server = new Server(this, port);
             } else {
                 System.out.println("숫자만 입력하세요 (범위: 0~65535)");
                 selectServerPort();
             }
-        } catch (InputMismatchException e) {
+        } catch (NumberFormatException e) {
             System.out.println("숫자만 입력하세요 (범위: 0~65535)");
             selectServerPort();
         }
