@@ -84,9 +84,24 @@ public class ClientInputThread extends Thread {
                         .removeClient(nickname);
                 connectThread.getClient().getChatMessanger().output(str.split(";", -1)[1] + nickname + ": 연결 종료");
             } else if (str.split(";", -1)[0].equalsIgnoreCase("clientlistinfo")) {
-                for (int i = 2; i < str.split(";", -1).length; i++) {
-                    connectThread.getClient().getChatMessanger().getChatGUI().getClientListScrollPane().getClientList()
-                            .addClient(str.split(";", -1)[i]);
+                if (connectThread.getClient().getChatMessanger().usingGUI()) {
+                    for (int i = 2; i < str.split(";", -1).length; i++) {
+                        connectThread.getClient().getChatMessanger().getChatGUI().getClientListScrollPane()
+                                .getClientList().addClient(str.split(";", -1)[i]);
+                    }
+                } else {
+                    int clientCount = 0;
+                    String clientListStr = "";
+                    for (int i = 2; i < str.split(";", -1).length; i++) {
+                        if (clientListStr.equalsIgnoreCase("")) {
+                            clientListStr = str.split(";", -1)[i];
+                        } else {
+                            clientListStr += ", " + str.split(";", -1)[i];
+                        }
+                        clientCount++;
+                    }
+                    connectThread.getClient().getChatMessanger()
+                            .output("현재 접속중 (" + clientCount + "): " + clientListStr);
                 }
             } else if (str.split(";", -1)[0].equalsIgnoreCase("chatrecord")) {
                 String chatRecord = "";
