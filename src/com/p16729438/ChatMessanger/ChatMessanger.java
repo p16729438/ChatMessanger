@@ -94,7 +94,7 @@ public class ChatMessanger {
     }
 
     private void selectClientAddress() {
-        System.out.println("IP 주소 입력: ");
+        System.out.print("IP 주소 입력: ");
         String address = sc.nextLine();
         selectClientPort(address);
     }
