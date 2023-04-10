@@ -148,6 +148,7 @@ public class ChatMessanger {
                         }
                     }
                 } else {
+                    client.getConnectThread().requestNickname(str);
                 }
             } else if (server != null) {
                 if (str.startsWith("/")) {
