@@ -81,7 +81,7 @@ public class ChatMessanger {
     }
 
     private void selectOption() {
-        System.out.println("옵션 선택(Client: c, Server: s, exit: any Key): ");
+        System.out.print("옵션 선택(Client: c, Server: s, exit: any Key): ");
         sc = new Scanner(System.in);
         String option = sc.nextLine();
         if (option.equalsIgnoreCase("c")) {

@@ -40,7 +40,7 @@ public class ClientConnectThread extends Thread {
             if (client.getChatMessanger().usingGUI()) {
                 new NicknameGUI(client);
             } else {
-                System.out.println("닉네임 입력: ");
+                System.out.print("닉네임 입력: ");
             }
         } catch (IOException e) {
             client.getChatMessanger().output("(IP 주소:" + address + ":" + port + "): 연결 실패");
@@ -102,7 +102,7 @@ public class ClientConnectThread extends Thread {
         if (client.getChatMessanger().usingGUI()) {
             new NicknameGUI(client);
         } else {
-            System.out.println("닉네임 입력: ");
+            System.out.print("닉네임 입력: ");
         }
     }
 
