@@ -75,13 +75,17 @@ public class ClientInputThread extends Thread {
                 }
             } else if (str.split(";", -1)[0].equalsIgnoreCase("connectinfo")) {
                 String nickname = str.split(";", -1)[2];
-                connectThread.getClient().getChatMessanger().getChatGUI().getClientListScrollPane().getClientList()
-                        .addClient(nickname);
+                if (connectThread.getClient().getChatMessanger().usingGUI()) {
+                    connectThread.getClient().getChatMessanger().getChatGUI().getClientListScrollPane().getClientList()
+                            .addClient(nickname);
+                }
                 connectThread.getClient().getChatMessanger().output(str.split(";", -1)[1] + nickname + ": 연결됨");
             } else if (str.split(";", -1)[0].equalsIgnoreCase("disconnectinfo")) {
                 String nickname = str.split(";", -1)[2];
-                connectThread.getClient().getChatMessanger().getChatGUI().getClientListScrollPane().getClientList()
-                        .removeClient(nickname);
+                if (connectThread.getClient().getChatMessanger().usingGUI()) {
+                    connectThread.getClient().getChatMessanger().getChatGUI().getClientListScrollPane().getClientList()
+                            .removeClient(nickname);
+                }
                 connectThread.getClient().getChatMessanger().output(str.split(";", -1)[1] + nickname + ": 연결 종료");
             } else if (str.split(";", -1)[0].equalsIgnoreCase("clientlistinfo")) {
                 if (connectThread.getClient().getChatMessanger().usingGUI()) {

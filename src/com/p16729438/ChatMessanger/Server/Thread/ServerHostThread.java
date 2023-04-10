@@ -60,8 +60,6 @@ public class ServerHostThread extends Thread {
                 outputThreads.put(socket, outputThread);
                 server.getChatMessanger().output(ChatMessangerTimeStamp.getTimeStamp() + "(IP 주소: "
                         + socket.getInetAddress().getHostAddress() + "): 연결됨");
-                sendClientListInfo(socket);
-                sendChatRecord(socket);
                 inputThread.start();
                 outputThread.start();
                 checkThread.addCheckList(socket);
@@ -166,6 +164,8 @@ public class ServerHostThread extends Thread {
         }
         server.getChatMessanger().output(ChatMessangerTimeStamp.getTimeStamp() + "(IP 주소: "
                 + socket.getInetAddress().getHostAddress() + "): 닉네임 설정: " + nickname);
+        sendClientListInfo(socket);
+        sendChatRecord(socket);
         sendConnectInfo(nickname, socket);
     }
 
