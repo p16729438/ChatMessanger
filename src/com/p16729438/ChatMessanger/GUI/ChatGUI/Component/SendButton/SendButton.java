@@ -14,7 +14,6 @@ public class SendButton extends JButton {
 
     public SendButton(ChatGUI chatGUI) {
         this.chatGUI = chatGUI;
-
         init();
     }
 
@@ -25,7 +24,6 @@ public class SendButton extends JButton {
         setBackground(Color.LIGHT_GRAY);
         setFont(ChatMessangerFont.ChatMessangerFont);
         setText("전송");
-
         addMouseListener(new ChatGUIMouseListener(chatGUI));
         addActionListener(new SendButtonActionListener(this));
     }

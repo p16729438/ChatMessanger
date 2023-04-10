@@ -4,8 +4,6 @@ public class WhisperCommand {
     /*
      * private ChatMessanger chatMessanger;
      * 
-     * public WhisperCommand(ChatMessanger chatMessanger) {
-     * this.chatMessanger = chatMessanger;
-     * }
+     * public WhisperCommand(ChatMessanger chatMessanger) { this.chatMessanger = chatMessanger; }
      */
 }

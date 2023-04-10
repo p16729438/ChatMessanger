@@ -13,7 +13,6 @@ public class OutputVerticalScrollBar extends JScrollBar {
 
     public OutputVerticalScrollBar(ChatGUI chatGUI) {
         this.chatGUI = chatGUI;
-
         init();
     }
 
@@ -25,7 +24,6 @@ public class OutputVerticalScrollBar extends JScrollBar {
         setAutoscrolls(true);
         setOrientation(VERTICAL);
         setUnitIncrement(30);
-
         addMouseListener(new ChatGUIMouseListener(chatGUI));
     }
 

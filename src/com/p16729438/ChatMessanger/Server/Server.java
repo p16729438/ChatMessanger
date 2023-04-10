@@ -6,7 +6,6 @@ import com.p16729438.ChatMessanger.Server.Thread.ServerHostThread;
 
 public class Server {
     private ChatMessanger chatMessanger;
-
     private ServerHostThread hostThread;
 
     public Server(ChatMessanger chatMessanger) {

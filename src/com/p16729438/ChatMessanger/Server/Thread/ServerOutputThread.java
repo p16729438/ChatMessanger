@@ -7,9 +7,7 @@ import java.util.ArrayList;
 
 public class ServerOutputThread extends Thread {
     private ServerHostThread hostThread;
-
     private Socket socket;
-
     private ArrayList<String> messageQueue = new ArrayList<String>();
 
     public ServerOutputThread(ServerHostThread hostThread, Socket socket) {

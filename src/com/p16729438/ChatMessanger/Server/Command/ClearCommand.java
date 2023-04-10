@@ -12,7 +12,6 @@ public class ClearCommand {
     public void execute() {
         if (chatMessanger.usingGUI()) {
             chatMessanger.getChatGUI().getOutputScrollPane().getOutputTextArea().setText(null);
-
         }
     }
 }

@@ -6,7 +6,6 @@ import java.util.ArrayList;
 
 public class ClientOutputThread extends Thread {
     private ClientConnectThread connectThread;
-
     private ArrayList<String> messageQueue = new ArrayList<String>();
 
     public ClientOutputThread(ClientConnectThread connectThread) {

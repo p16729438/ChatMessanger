@@ -17,7 +17,6 @@ import com.p16729438.ChatMessanger.Util.ChatMessangerFont;
 
 public class ChatGUI extends JFrame {
     private ChatMessanger chatMessanger;
-
     private ClientListScrollPane clientListScrollPane;
     private InputTextField inputTextField;
     private OutputScrollPane outputScrollPane;
@@ -25,7 +24,6 @@ public class ChatGUI extends JFrame {
 
     public ChatGUI(ChatMessanger chatMessanger) {
         this.chatMessanger = chatMessanger;
-
         init();
     }
 
@@ -42,21 +40,16 @@ public class ChatGUI extends JFrame {
         }
         getContentPane().setBackground(Color.DARK_GRAY);
         setFont(ChatMessangerFont.ChatMessangerFont);
-
         clientListScrollPane = new ClientListScrollPane(this);
         inputTextField = new InputTextField(this);
         outputScrollPane = new OutputScrollPane(this);
         sendButton = new SendButton(this);
-
         getContentPane().add(clientListScrollPane);
         getContentPane().add(inputTextField);
         getContentPane().add(outputScrollPane);
         getContentPane().add(sendButton);
-
         getRootPane().setDefaultButton(sendButton);
-
         addMouseListener(new ChatGUIMouseListener(this));
-
         setVisible(true);
     }
 

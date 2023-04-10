@@ -5,7 +5,6 @@ import java.util.ArrayList;
 
 public class ServerCheckThread extends Thread {
     private ServerHostThread hostThread;
-
     private ArrayList<Socket> connectionCheckList = new ArrayList<Socket>();
 
     public ServerCheckThread(ServerHostThread hostThread) {

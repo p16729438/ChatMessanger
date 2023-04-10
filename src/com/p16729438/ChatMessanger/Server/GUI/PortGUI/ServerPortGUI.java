@@ -12,7 +12,6 @@ public class ServerPortGUI extends JOptionPane {
 
     public ServerPortGUI(Server server) {
         this.server = server;
-
         init();
     }
 
@@ -23,22 +22,19 @@ public class ServerPortGUI extends JOptionPane {
         setForeground(Color.LIGHT_GRAY);
         setFont(ChatMessangerFont.ChatMessangerFont);
         setVisible(true);
-
         int port = selectPort();
         server.getHostThread().setPort(port);
     }
 
     private int selectPort() {
         try {
-            String portStr = (String) showInputDialog(server.getChatMessanger().getChatGUI(), "",
-                    "포트 번호 입력", PLAIN_MESSAGE, null, null, null);
+            String portStr = (String) showInputDialog(server.getChatMessanger().getChatGUI(), "", "포트 번호 입력", PLAIN_MESSAGE, null, null, null);
             if (portStr != null) {
                 int port = Integer.parseInt(portStr);
                 if (port >= 0 && port <= 65535) {
                     return port;
                 } else {
-                    server.getChatMessanger().getChatGUI().getOutputScrollPane().getOutputTextArea()
-                            .appendText("숫자만 입력하세요 (범위: 0~65535)");
+                    server.getChatMessanger().getChatGUI().getOutputScrollPane().getOutputTextArea().appendText("숫자만 입력하세요 (범위: 0~65535)");
                     return selectPort();
                 }
             } else {
@@ -46,10 +42,8 @@ public class ServerPortGUI extends JOptionPane {
                 server.getChatMessanger().getChatGUI().dispose();
                 return 0;
             }
-
         } catch (NumberFormatException e) {
-            server.getChatMessanger().getChatGUI().getOutputScrollPane().getOutputTextArea()
-                    .appendText("숫자만 입력하세요 (범위: 0~65535)");
+            server.getChatMessanger().getChatGUI().getOutputScrollPane().getOutputTextArea().appendText("숫자만 입력하세요 (범위: 0~65535)");
             return selectPort();
         }
     }

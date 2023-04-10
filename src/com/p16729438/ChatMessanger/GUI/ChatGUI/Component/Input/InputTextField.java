@@ -13,7 +13,6 @@ public class InputTextField extends JTextField {
 
     public InputTextField(ChatGUI chatGUI) {
         this.chatGUI = chatGUI;
-
         init();
     }
 
@@ -24,7 +23,6 @@ public class InputTextField extends JTextField {
         setBackground(Color.LIGHT_GRAY);
         setSelectionColor(Color.GRAY);
         setFont(ChatMessangerFont.ChatMessangerFont);
-
         addMouseListener(new ChatGUIMouseListener(chatGUI));
     }
 

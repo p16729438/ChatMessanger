@@ -11,12 +11,10 @@ import com.p16729438.ChatMessanger.Util.ChatMessangerFont;
 
 public class ClientListScrollPane extends JScrollPane {
     private ChatGUI chatGUI;
-
     private ClientList clientList;
 
     public ClientListScrollPane(ChatGUI chatGUI) {
         this.chatGUI = chatGUI;
-
         init();
     }
 
@@ -30,7 +28,6 @@ public class ClientListScrollPane extends JScrollPane {
         setVerticalScrollBar(new OutputVerticalScrollBar(chatGUI));
         clientList = new ClientList(chatGUI);
         setViewportView(clientList);
-
         addMouseListener(new ChatGUIMouseListener(chatGUI));
     }
 

@@ -12,7 +12,6 @@ public class SelectGUI extends JOptionPane {
 
     public SelectGUI(ChatMessanger chatMessanger) {
         this.chatMessanger = chatMessanger;
-
         init();
     }
 
@@ -24,8 +23,7 @@ public class SelectGUI extends JOptionPane {
         setName("select");
         setVisible(true);
         String[] list = { "Client", "Server" };
-        String str = (String) showInputDialog(chatMessanger.getChatGUI(), "", "옵션 선택", PLAIN_MESSAGE, null,
-                list, "Client");
+        String str = (String) showInputDialog(chatMessanger.getChatGUI(), "", "옵션 선택", PLAIN_MESSAGE, null, list, "Client");
         chatMessanger.select(str);
     }
 }

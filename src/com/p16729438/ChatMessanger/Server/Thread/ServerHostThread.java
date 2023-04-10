@@ -14,24 +14,15 @@ import com.p16729438.ChatMessanger.Util.ChatMessangerTimeStamp;
 
 public class ServerHostThread extends Thread {
     private Server server;
-
     private boolean ready;
-
     private ServerSocket serverSocket;
-
     private int port;
-
     private ArrayList<Socket> socketList = new ArrayList<Socket>();
-
     private ServerCheckThread checkThread;
-
     private HashMap<Socket, ServerInputThread> inputThreads = new HashMap<Socket, ServerInputThread>();
     private HashMap<Socket, ServerOutputThread> outputThreads = new HashMap<Socket, ServerOutputThread>();
-
     private HashMap<Socket, String> nicknameMap = new HashMap<Socket, String>();
-
     private HashMap<String, String> nicknamePasswordMap = new HashMap<String, String>();
-
     private ArrayList<String> chatRecord = new ArrayList<String>();
 
     public ServerHostThread(Server server) {
@@ -41,11 +32,9 @@ public class ServerHostThread extends Thread {
     @Override
     public void run() {
         try {
-            server.getChatMessanger().output(ChatMessangerTimeStamp.getTimeStamp() + "(IP 주소: "
-                    + InetAddress.getLocalHost().getHostAddress() + ":" + port + "): 서버 여는중");
+            server.getChatMessanger().output(ChatMessangerTimeStamp.getTimeStamp() + "(IP 주소: " + InetAddress.getLocalHost().getHostAddress() + ":" + port + "): 서버 여는중");
             serverSocket = new ServerSocket(port);
-            server.getChatMessanger().output(ChatMessangerTimeStamp.getTimeStamp() + "(IP 주소: "
-                    + InetAddress.getLocalHost().getHostAddress() + ":" + port + "): 서버 열림");
+            server.getChatMessanger().output(ChatMessangerTimeStamp.getTimeStamp() + "(IP 주소: " + InetAddress.getLocalHost().getHostAddress() + ":" + port + "): 서버 열림");
             server.getChatMessanger().output(ChatMessangerTimeStamp.getTimeStamp() + "연결 대기중...");
             checkThread = new ServerCheckThread(this);
             checkThread.start();
@@ -58,16 +47,14 @@ public class ServerHostThread extends Thread {
                 ServerOutputThread outputThread = new ServerOutputThread(this, socket);
                 inputThreads.put(socket, inputThread);
                 outputThreads.put(socket, outputThread);
-                server.getChatMessanger().output(ChatMessangerTimeStamp.getTimeStamp() + "(IP 주소: "
-                        + socket.getInetAddress().getHostAddress() + "): 연결됨");
+                server.getChatMessanger().output(ChatMessangerTimeStamp.getTimeStamp() + "(IP 주소: " + socket.getInetAddress().getHostAddress() + "): 연결됨");
                 inputThread.start();
                 outputThread.start();
                 checkThread.addCheckList(socket);
             }
         } catch (BindException e) {
             try {
-                server.getChatMessanger().output(ChatMessangerTimeStamp.getTimeStamp() + "(IP 주소: "
-                        + InetAddress.getLocalHost().getHostAddress() + ":" + port + "): 이미 사용중");
+                server.getChatMessanger().output(ChatMessangerTimeStamp.getTimeStamp() + "(IP 주소: " + InetAddress.getLocalHost().getHostAddress() + ":" + port + "): 이미 사용중");
             } catch (UnknownHostException e1) {
                 e1.printStackTrace();
             }
@@ -77,8 +64,7 @@ public class ServerHostThread extends Thread {
     }
 
     public void disconnect(Socket socket) {
-        server.getChatMessanger().output(ChatMessangerTimeStamp.getTimeStamp() + getNickname(socket) + "(IP 주소: "
-                + socket.getInetAddress().getHostAddress() + "): 연결 종료됨");
+        server.getChatMessanger().output(ChatMessangerTimeStamp.getTimeStamp() + getNickname(socket) + "(IP 주소: " + socket.getInetAddress().getHostAddress() + "): 연결 종료됨");
         sendDisconnectInfo(getNickname(socket), socket);
         removeIOThread(socket);
         removeNickname(socket);
@@ -135,14 +121,12 @@ public class ServerHostThread extends Thread {
                 clientList += ";" + str;
             }
         }
-        outputThreads.get(socket)
-                .addMessageQueue("clientlistinfo;" + ChatMessangerTimeStamp.getTimeStamp() + ";" + clientList);
+        outputThreads.get(socket).addMessageQueue("clientlistinfo;" + ChatMessangerTimeStamp.getTimeStamp() + ";" + clientList);
     }
 
     public void sendChatRecord(Socket socket) {
         for (String str : chatRecord) {
-            outputThreads.get(socket)
-                    .addMessageQueue("chatrecord;" + ChatMessangerTimeStamp.getTimeStamp() + ";" + str);
+            outputThreads.get(socket).addMessageQueue("chatrecord;" + ChatMessangerTimeStamp.getTimeStamp() + ";" + str);
         }
     }
 
@@ -162,8 +146,7 @@ public class ServerHostThread extends Thread {
         if (server.getChatMessanger().usingGUI()) {
             server.getChatMessanger().getChatGUI().getClientListScrollPane().getClientList().addClient(nickname);
         }
-        server.getChatMessanger().output(ChatMessangerTimeStamp.getTimeStamp() + "(IP 주소: "
-                + socket.getInetAddress().getHostAddress() + "): 닉네임 설정: " + nickname);
+        server.getChatMessanger().output(ChatMessangerTimeStamp.getTimeStamp() + "(IP 주소: " + socket.getInetAddress().getHostAddress() + "): 닉네임 설정: " + nickname);
         sendClientListInfo(socket);
         sendChatRecord(socket);
         sendConnectInfo(nickname, socket);

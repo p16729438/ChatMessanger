@@ -12,12 +12,10 @@ import com.p16729438.ChatMessanger.Util.ChatMessangerFont;
 
 public class ClientList extends JList<String> {
     private ChatGUI chatGUI;
-
     private DefaultListModel<String> model;
 
     public ClientList(ChatGUI chatGUI) {
         this.chatGUI = chatGUI;
-
         init();
     }
 
@@ -32,7 +30,6 @@ public class ClientList extends JList<String> {
         setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
         model = new DefaultListModel<String>();
         setModel(model);
-
         addMouseListener(new ChatGUIMouseListener(chatGUI));
     }
 

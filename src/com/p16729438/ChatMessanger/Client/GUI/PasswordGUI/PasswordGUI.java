@@ -13,7 +13,6 @@ public class PasswordGUI extends JOptionPane {
 
     public PasswordGUI(Client client) {
         this.client = client;
-
         init();
     }
 
@@ -24,7 +23,6 @@ public class PasswordGUI extends JOptionPane {
         setForeground(Color.LIGHT_GRAY);
         setFont(ChatMessangerFont.ChatMessangerFont);
         setVisible(true);
-
         JPasswordField passwordField = new JPasswordField();
         showMessageDialog(client.getChatMessanger().getChatGUI(), passwordField, "비밀번호 입력", PLAIN_MESSAGE);
         String password = String.valueOf(passwordField.getPassword());

@@ -9,21 +9,14 @@ import com.p16729438.ChatMessanger.Util.ChatMessangerData;
 
 public class ClientConnectThread extends Thread {
     private Client client;
-
     private boolean ready;
-
     private Socket socket;
-
     private String address;
     private int port;
-
     private ClientCheckThread checkThread;
-
     private ClientInputThread inputThread;
     private ClientOutputThread outputThread;
-
     private String nickname;
-
     private boolean requestingNickname;
     private String requestNickname;
 

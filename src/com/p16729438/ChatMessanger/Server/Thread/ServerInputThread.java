@@ -8,7 +8,6 @@ import com.p16729438.ChatMessanger.Util.ChatMessangerTimeStamp;
 
 public class ServerInputThread extends Thread {
     private ServerHostThread hostThread;
-
     private Socket socket;
 
     public ServerInputThread(ServerHostThread hostThread, Socket socket) {
@@ -26,14 +25,12 @@ public class ServerInputThread extends Thread {
             }
             dis.close();
             if (hostThread.getServer().getChatMessanger().usingGUI()) {
-                hostThread.getServer().getChatMessanger().getChatGUI().getClientListScrollPane().getClientList()
-                        .removeClient(hostThread.getNickname(socket));
+                hostThread.getServer().getChatMessanger().getChatGUI().getClientListScrollPane().getClientList().removeClient(hostThread.getNickname(socket));
             }
             hostThread.disconnect(socket);
         } catch (IOException e) {
             if (hostThread.getServer().getChatMessanger().usingGUI()) {
-                hostThread.getServer().getChatMessanger().getChatGUI().getClientListScrollPane().getClientList()
-                        .removeClient(hostThread.getNickname(socket));
+                hostThread.getServer().getChatMessanger().getChatGUI().getClientListScrollPane().getClientList().removeClient(hostThread.getNickname(socket));
             }
             hostThread.disconnect(socket);
         }
@@ -53,14 +50,12 @@ public class ServerInputThread extends Thread {
                     }
                 }
                 hostThread.sendChat(hostThread.getNickname(socket) + ";" + chat);
-                hostThread.getServer().getChatMessanger()
-                        .output(ChatMessangerTimeStamp.getTimeStamp() + hostThread.getNickname(socket) + ": " + chat);
+                hostThread.getServer().getChatMessanger().output(ChatMessangerTimeStamp.getTimeStamp() + hostThread.getNickname(socket) + ": " + chat);
             } else if (str.split(";", -1)[0].equalsIgnoreCase("nickname")) {
                 String nickname = str.substring(9);
                 if (!hostThread.hasNickname(socket)) {
                     if (nickname.length() >= 1 && nickname.length() <= 16) {
-                        if (!nickname.contains("Server") && !nickname.contains("null") && !nickname.contains(";")
-                                && !nickname.contains("\n") && !nickname.contains(" ")) {
+                        if (!nickname.contains("Server") && !nickname.contains("null") && !nickname.contains(";") && !nickname.contains("\n") && !nickname.contains(" ")) {
                             try {
                                 Long.parseLong(nickname);
                                 if (nickname.startsWith("-")) {
@@ -92,19 +87,13 @@ public class ServerInputThread extends Thread {
                 }
             }
             /*
-             * else if(str.split(";", -1)[0].equalsIgnoreCase("password")) {
-             * String nickname = str.split(";", -1)[1];
-             * String password = str.split(";", -1)[2];
-             * hostThread.set
-             * }
+             * else if(str.split(";", -1)[0].equalsIgnoreCase("password")) { String nickname = str.split(";", -1)[1]; String password = str.split(";", -1)[2]; hostThread.set }
              */
             else {
-                hostThread.getServer().getChatMessanger()
-                        .output(ChatMessangerTimeStamp.getTimeStamp() + "알 수 없는 형식의 정보 수신됨: " + str);
+                hostThread.getServer().getChatMessanger().output(ChatMessangerTimeStamp.getTimeStamp() + "알 수 없는 형식의 정보 수신됨: " + str);
             }
         } catch (IndexOutOfBoundsException e) {
-            hostThread.getServer().getChatMessanger()
-                    .output(ChatMessangerTimeStamp.getTimeStamp() + "알 수 없는 형식의 정보 수신됨: " + str);
+            hostThread.getServer().getChatMessanger().output(ChatMessangerTimeStamp.getTimeStamp() + "알 수 없는 형식의 정보 수신됨: " + str);
         }
     }
 }

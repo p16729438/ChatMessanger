@@ -15,7 +15,6 @@ public class OutputTextArea extends JTextArea {
 
     public OutputTextArea(ChatGUI chatGUI) {
         this.chatGUI = chatGUI;
-
         init();
     }
 
@@ -31,7 +30,6 @@ public class OutputTextArea extends JTextArea {
         setLineWrap(true);
         setWrapStyleWord(true);
         ((DefaultCaret) getCaret()).setUpdatePolicy(DefaultCaret.ALWAYS_UPDATE);
-
         addMouseListener(new ChatGUIMouseListener(chatGUI));
     }
 
@@ -51,7 +49,6 @@ public class OutputTextArea extends JTextArea {
                 ChatMessangerSound.playNotificationSound();
             }
         }
-
     }
 
     public ChatGUI getChatGUI() {

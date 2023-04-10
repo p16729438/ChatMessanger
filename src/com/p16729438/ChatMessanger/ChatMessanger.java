@@ -16,12 +16,9 @@ import com.p16729438.ChatMessanger.Server.Server;
 public class ChatMessanger {
     private boolean usingGUI = true;
     private boolean readyGUI = false;
-
     private Scanner sc;
-
     private Client client;
     private Server server;
-
     private ChatGUI chatGUI;
 
     public ChatMessanger() {
@@ -40,36 +37,37 @@ public class ChatMessanger {
 
     private boolean isLatestVersion() {
         try {
-            BufferedReader thisVersionReader = new BufferedReader(
-                    new InputStreamReader(Main.class.getResourceAsStream("/version.txt")));
+            BufferedReader thisVersionReader = new BufferedReader(new InputStreamReader(Main.class.getResourceAsStream("/version.txt")));
             String thisVersion = thisVersionReader.readLine();
             thisVersionReader.close();
-            BufferedReader compareVersionReader = new BufferedReader(new InputStreamReader(
-                    new URL("http://16729438.kro.kr/ChatMessanger/version/version.txt").openStream()));
-            String compareVersion = compareVersionReader.readLine();
-            compareVersionReader.close();
-            if (Integer.parseInt(thisVersion.split("\\.", -1)[0]) < Integer
-                    .parseInt(compareVersion.split("\\.", -1)[0])) {
+            BufferedReader latestVersionReader = new BufferedReader(new InputStreamReader(new URL("http://16729438.kro.kr/ChatMessanger/version/version.txt").openStream()));
+            String latestVersion = latestVersionReader.readLine();
+            latestVersionReader.close();
+            if (Integer.parseInt(thisVersion.split("\\.", -1)[0]) < Integer.parseInt(latestVersion.split("\\.", -1)[0])) {
                 output("새로운 버전이 있습니다");
+                output("현재 버전: " + thisVersion + ", 최신 버전: " + latestVersion);
                 output("http://16729438.kro.kr");
                 output("위 링크에 접속하여 새로운 버전을 다운로드해주세요");
                 return false;
-            } else if (Integer.parseInt(thisVersion.split("\\.",
-                    -1)[0]) == Integer.parseInt(
-                            compareVersion.split("\\.",
-                                    -1)[0])) {
-                if (Integer.parseInt(thisVersion.split("\\.",
-                        -1)[1]) < Integer.parseInt(compareVersion.split("\\.", -1)[1])) {
+            } else if (Integer.parseInt(thisVersion.split("\\.", -1)[0]) == Integer.parseInt(latestVersion.split("\\.", -1)[0])) {
+                if (Integer.parseInt(thisVersion.split("\\.", -1)[1]) < Integer.parseInt(latestVersion.split("\\.", -1)[1])) {
                     output("새로운 버전이 있습니다");
+                    output("현재 버전: " + thisVersion + ", 최신 버전: " + latestVersion);
                     output("http://16729438.kro.kr");
                     output("위 링크에 접속하여 새로운 버전을 다운로드해주세요");
                     return false;
-                } else if (Integer.parseInt(thisVersion.split("\\.",
-                        -1)[1]) == Integer
-                                .parseInt(compareVersion.split("\\.", -1)[1])) {
-                    if (Integer.parseInt(thisVersion.split("\\.",
-                            -1)[2]) < Integer.parseInt(compareVersion.split("\\.", -1)[2])) {
+                } else if (Integer.parseInt(thisVersion.split("\\.", -1)[1]) == Integer.parseInt(latestVersion.split("\\.", -1)[1])) {
+                    if (Integer.parseInt(thisVersion.split("\\.", -1)[2]) < Integer.parseInt(latestVersion.split("\\.", -1)[2])) {
                         output("새로운 버전이 있습니다");
+                        output("현재 버전: " + thisVersion + ", 최신 버전: " + latestVersion);
+                        output("http://16729438.kro.kr");
+                        output("위 링크에 접속하여 새로운 버전을 다운로드해주세요");
+                        return false;
+                    } else if (Integer.parseInt(thisVersion.split("\\.", -1)[2]) == Integer.parseInt(latestVersion.split("\\.", -1)[2])) {
+                        return true;
+                    } else {
+                        output("클라이언트가 변조되었거나 서버로부터 가져온 버전 정보가 비정상적일 수 있습니다.");
+                        output("현재 버전: " + thisVersion + ", 최신 버전: " + latestVersion);
                         output("http://16729438.kro.kr");
                         output("위 링크에 접속하여 새로운 버전을 다운로드해주세요");
                         return false;
@@ -77,8 +75,10 @@ public class ChatMessanger {
                 }
             }
         } catch (IndexOutOfBoundsException | IOException | NumberFormatException e) {
+            e.printStackTrace();
+            return false;
         }
-        return true;
+        return false;
     }
 
     private void selectOption() {
@@ -155,7 +155,6 @@ public class ChatMessanger {
                         }
                     }
                     if (str.split(" ", -1)[0].equalsIgnoreCase("/setmanager")) {
-
                     }
                 } else {
                     if (!str.equalsIgnoreCase("")) {

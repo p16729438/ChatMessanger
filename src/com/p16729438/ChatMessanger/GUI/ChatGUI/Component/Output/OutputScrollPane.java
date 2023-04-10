@@ -10,12 +10,10 @@ import com.p16729438.ChatMessanger.Util.ChatMessangerFont;
 
 public class OutputScrollPane extends JScrollPane {
     private ChatGUI chatGUI;
-
     private OutputTextArea outputTextArea;
 
     public OutputScrollPane(ChatGUI chatGUI) {
         this.chatGUI = chatGUI;
-
         init();
     }
 
@@ -29,7 +27,6 @@ public class OutputScrollPane extends JScrollPane {
         outputTextArea = new OutputTextArea(chatGUI);
         setAutoscrolls(true);
         setViewportView(outputTextArea);
-
         addMouseListener(new ChatGUIMouseListener(chatGUI));
     }
 

@@ -7,7 +7,6 @@ import com.p16729438.ChatMessanger.Client.Thread.ClientConnectThread;
 
 public class Client {
     private ChatMessanger chatMessanger;
-
     private ClientConnectThread connectThread;
 
     public Client(ChatMessanger chatMessanger) {

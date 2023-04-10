@@ -18,19 +18,15 @@ public class SendButtonActionListener implements ActionListener {
             if (sendButton.equals(event.getSource())) {
                 String str = sendButton.getChatGUI().getInputTextField().getText();
                 if (!str.equalsIgnoreCase("")) {
-                    if (sendButton.getChatGUI().getChatMessanger().getClient().getConnectThread()
-                            .getOutputThread() != null) {
-                        if (sendButton.getChatGUI().getChatMessanger().getClient().getConnectThread()
-                                .getNickname() != null) {
+                    if (sendButton.getChatGUI().getChatMessanger().getClient().getConnectThread().getOutputThread() != null) {
+                        if (sendButton.getChatGUI().getChatMessanger().getClient().getConnectThread().getNickname() != null) {
                             sendButton.getChatGUI().getChatMessanger().getClient().getConnectThread().sendChat(str);
                             sendButton.getChatGUI().getInputTextField().setText(null);
                         } else {
-                            sendButton.getChatGUI().getOutputScrollPane().getOutputTextArea()
-                                    .appendText("닉네임 승인 대기중입니다.");
+                            sendButton.getChatGUI().getOutputScrollPane().getOutputTextArea().appendText("닉네임 승인 대기중입니다.");
                         }
                     } else {
-                        sendButton.getChatGUI().getOutputScrollPane().getOutputTextArea()
-                                .appendText("서버에 연결되어 있지 않습니다.");
+                        sendButton.getChatGUI().getOutputScrollPane().getOutputTextArea().appendText("서버에 연결되어 있지 않습니다.");
                     }
                 }
             }
@@ -39,8 +35,7 @@ public class SendButtonActionListener implements ActionListener {
                 String str = sendButton.getChatGUI().getInputTextField().getText();
                 if (!str.equalsIgnoreCase("")) {
                     sendButton.getChatGUI().getOutputScrollPane().getOutputTextArea().appendText(str);
-                    sendButton.getChatGUI().getChatMessanger().getServer().getHostThread()
-                            .sendChat("Server;" + str);
+                    sendButton.getChatGUI().getChatMessanger().getServer().getHostThread().sendChat("Server;" + str);
                     sendButton.getChatGUI().getInputTextField().setText(null);
                 }
             }

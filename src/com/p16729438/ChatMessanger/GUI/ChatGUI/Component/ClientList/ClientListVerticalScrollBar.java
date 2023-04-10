@@ -13,7 +13,6 @@ public class ClientListVerticalScrollBar extends JScrollBar {
 
     public ClientListVerticalScrollBar(ChatGUI chatGUI) {
         this.chatGUI = chatGUI;
-
         init();
     }
 
@@ -25,7 +24,6 @@ public class ClientListVerticalScrollBar extends JScrollBar {
         setFont(ChatMessangerFont.ChatMessangerFont);
         setOrientation(VERTICAL);
         setUnitIncrement(30);
-
         addMouseListener(new ChatGUIMouseListener(chatGUI));
     }
 
