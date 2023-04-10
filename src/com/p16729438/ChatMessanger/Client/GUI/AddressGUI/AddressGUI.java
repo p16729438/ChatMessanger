@@ -30,6 +30,7 @@ public class AddressGUI extends JOptionPane {
                     PLAIN_MESSAGE, null, null, ChatMessangerData.getAddressData());
             if (address != null) {
                 client.getConnectThread().setAddress(address);
+                ChatMessangerData.setAddressData(address);
             } else {
                 client.getChatMessanger().getChatGUI().setVisible(false);
                 client.getChatMessanger().getChatGUI().dispose();

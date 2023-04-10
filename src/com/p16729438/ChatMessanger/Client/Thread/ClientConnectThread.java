@@ -65,12 +65,10 @@ public class ClientConnectThread extends Thread {
 
     public void setAddress(String address) {
         this.address = address;
-        ChatMessangerData.setAddressData(address);
     }
 
     public void setPort(int port) {
         this.port = port;
-        ChatMessangerData.setPortData(String.valueOf(port));
     }
 
     public void sendCheck() {

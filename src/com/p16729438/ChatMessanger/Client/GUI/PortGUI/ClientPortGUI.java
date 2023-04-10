@@ -28,6 +28,7 @@ public class ClientPortGUI extends JOptionPane {
 
             int port = selectPort();
             client.getConnectThread().setPort(port);
+            ChatMessangerData.setPortData(String.valueOf(port));
         }
     }
 
