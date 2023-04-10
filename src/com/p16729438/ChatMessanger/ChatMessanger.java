@@ -131,20 +131,23 @@ public class ChatMessanger {
         }
     }
 
-    public void input() {
+    private void input() {
         String str;
         while ((str = sc.nextLine()) != null) {
             if (client != null) {
-                if (str.startsWith("/")) {
-                    if (str.split(" ", -1)[0].equalsIgnoreCase("/clear")) {
-                        if (str.split(" ").length == 1) {
-                            // new ClearCommand(this).execute();
+                if (client.getConnectThread().getNickname() != null && !client.getConnectThread().isRequestingNickname()) {
+                    if (str.startsWith("/")) {
+                        if (str.split(" ", -1)[0].equalsIgnoreCase("/clear")) {
+                            if (str.split(" ").length == 1) {
+                                // new ClearCommand(this).execute();
+                            }
+                        }
+                    } else {
+                        if (!str.equalsIgnoreCase("")) {
+                            client.getConnectThread().sendChat(str);
                         }
                     }
                 } else {
-                    if (!str.equalsIgnoreCase("")) {
-                        client.getConnectThread().sendChat(str);
-                    }
                 }
             } else if (server != null) {
                 if (str.startsWith("/")) {
@@ -202,10 +205,6 @@ public class ChatMessanger {
 
     public void setReadyGUI(boolean readyGUI) {
         this.readyGUI = readyGUI;
-    }
-
-    public Scanner getScanner() {
-        return sc;
     }
 
     public boolean readyGUI() {
