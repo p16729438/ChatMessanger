@@ -41,7 +41,7 @@ public class ChatMessanger {
     private boolean isLatestVersion() {
         try {
             BufferedReader thisVersionReader = new BufferedReader(
-                    new InputStreamReader(Main.class.getResourceAsStream("/com/p16729438/ChatMessanger/version.txt")));
+                    new InputStreamReader(Main.class.getResourceAsStream("/version.txt")));
             String thisVersion = thisVersionReader.readLine();
             thisVersionReader.close();
             BufferedReader compareVersionReader = new BufferedReader(new InputStreamReader(

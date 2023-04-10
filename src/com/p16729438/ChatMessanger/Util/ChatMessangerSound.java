@@ -16,7 +16,7 @@ public class ChatMessangerSound {
         try {
             Clip clip = AudioSystem.getClip();
             AudioInputStream ais = AudioSystem.getAudioInputStream(new BufferedInputStream(
-                    Main.class.getResourceAsStream("/com/p16729438/ChatMessanger/notification_sound.wav")));
+                    Main.class.getResourceAsStream("/notification_sound.wav")));
             clip.open(ais);
             clip.start();
         } catch (LineUnavailableException | UnsupportedAudioFileException | IOException e) {
