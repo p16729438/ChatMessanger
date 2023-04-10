@@ -46,21 +46,21 @@ public class ChatMessanger {
                 output("새로운 버전이 있습니다");
                 output("현재 버전: " + thisVersion + ", 최신 버전: " + latestVersion);
                 output("http://16729438.kro.kr");
-                output("위 링크에 접속하여 새로운 버전을 다운로드해주세요");
+                output("위 링크에 접속하여 최신 버전을 다운로드해주세요");
                 return false;
             } else if (Integer.parseInt(thisVersion.split("\\.", -1)[0]) == Integer.parseInt(latestVersion.split("\\.", -1)[0])) {
                 if (Integer.parseInt(thisVersion.split("\\.", -1)[1]) < Integer.parseInt(latestVersion.split("\\.", -1)[1])) {
                     output("새로운 버전이 있습니다");
                     output("현재 버전: " + thisVersion + ", 최신 버전: " + latestVersion);
                     output("http://16729438.kro.kr");
-                    output("위 링크에 접속하여 새로운 버전을 다운로드해주세요");
+                    output("위 링크에 접속하여 최신 버전을 다운로드해주세요");
                     return false;
                 } else if (Integer.parseInt(thisVersion.split("\\.", -1)[1]) == Integer.parseInt(latestVersion.split("\\.", -1)[1])) {
                     if (Integer.parseInt(thisVersion.split("\\.", -1)[2]) < Integer.parseInt(latestVersion.split("\\.", -1)[2])) {
                         output("새로운 버전이 있습니다");
                         output("현재 버전: " + thisVersion + ", 최신 버전: " + latestVersion);
                         output("http://16729438.kro.kr");
-                        output("위 링크에 접속하여 새로운 버전을 다운로드해주세요");
+                        output("위 링크에 접속하여 최신 버전을 다운로드해주세요");
                         return false;
                     } else if (Integer.parseInt(thisVersion.split("\\.", -1)[2]) == Integer.parseInt(latestVersion.split("\\.", -1)[2])) {
                         return true;
@@ -68,7 +68,7 @@ public class ChatMessanger {
                         output("클라이언트가 변조되었거나 서버로부터 가져온 버전 정보가 비정상적일 수 있습니다.");
                         output("현재 버전: " + thisVersion + ", 최신 버전: " + latestVersion);
                         output("http://16729438.kro.kr");
-                        output("위 링크에 접속하여 새로운 버전을 다운로드해주세요");
+                        output("위 링크에 접속하여 최신 버전을 다운로드해주세요");
                         return false;
                     }
                 }
