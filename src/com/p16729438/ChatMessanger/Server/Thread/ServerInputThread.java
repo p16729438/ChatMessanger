@@ -55,26 +55,12 @@ public class ServerInputThread extends Thread {
                 String nickname = str.substring(9);
                 if (!hostThread.hasNickname(socket)) {
                     if (nickname.length() >= 1 && nickname.length() <= 16) {
-                        if (!nickname.contains("Server") && !nickname.contains("null") && !nickname.contains(";") && !nickname.contains("\n") && !nickname.contains(" ")) {
-                            try {
-                                Long.parseLong(nickname);
-                                if (nickname.startsWith("-")) {
-                                    if (!hostThread.existNickname(nickname)) {
-                                        hostThread.sendNickname("true", socket);
-                                        hostThread.setNickname(socket, nickname);
-                                    } else {
-                                        hostThread.sendNickname("false;already", socket);
-                                    }
-                                } else {
-                                    hostThread.sendNickname("false;number", socket);
-                                }
-                            } catch (NumberFormatException e) {
-                                if (!hostThread.existNickname(nickname)) {
-                                    hostThread.sendNickname("true", socket);
-                                    hostThread.setNickname(socket, nickname);
-                                } else {
-                                    hostThread.sendNickname("false;already", socket);
-                                }
+                        if (!nickname.contains("Server") && !nickname.contains("null") && !nickname.contains(";") && !nickname.contains("\n")) {
+                            if (!hostThread.existNickname(nickname)) {
+                                hostThread.sendNickname("true", socket);
+                                hostThread.setNickname(socket, nickname);
+                            } else {
+                                hostThread.sendNickname("false;already", socket);
                             }
                         } else {
                             hostThread.sendNickname("false;invalid", socket);

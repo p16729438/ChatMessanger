@@ -84,7 +84,9 @@ public class ServerHostThread extends Thread {
         addChatRecord(chatRecord);
         server.getChatMessanger().output(chatRecord);
         for (Socket socket : outputThreads.keySet()) {
-            outputThreads.get(socket).addMessageQueue(chat);
+            if (nicknameMap.containsKey(socket)) {
+                outputThreads.get(socket).addMessageQueue(chat);
+            }
         }
     }
 
@@ -96,8 +98,10 @@ public class ServerHostThread extends Thread {
         String connectInfo = "connectinfo;" + ChatMessangerTimeStamp.getTimeStamp() + ";" + str;
         addChatRecord(connectInfo.split(";", -1)[1] + str + ": 연결됨");
         for (Socket socket : outputThreads.keySet()) {
-            if (client != socket) {
-                outputThreads.get(socket).addMessageQueue(connectInfo);
+            if (nicknameMap.containsKey(socket)) {
+                if (client != socket) {
+                    outputThreads.get(socket).addMessageQueue(connectInfo);
+                }
             }
         }
     }
@@ -106,8 +110,10 @@ public class ServerHostThread extends Thread {
         String disconnectInfo = "disconnectinfo;" + ChatMessangerTimeStamp.getTimeStamp() + ";" + str;
         addChatRecord(disconnectInfo.split(";", -1)[1] + str + ": 연결 종료됨");
         for (Socket socket : outputThreads.keySet()) {
-            if (client != socket) {
-                outputThreads.get(socket).addMessageQueue(disconnectInfo);
+            if (nicknameMap.containsKey(socket)) {
+                if (client != socket) {
+                    outputThreads.get(socket).addMessageQueue(disconnectInfo);
+                }
             }
         }
     }

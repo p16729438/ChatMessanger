@@ -50,10 +50,7 @@ public class ClientInputThread extends Thread {
                             connectThread.getClient().getChatMessanger().output(str.split(";", -1)[1] + "닉네임이 너무 짧거나 깁니다. (1자~16자)");
                             connectThread.clearRequestNickname();
                         } else if (str.split(";", -1)[3].equalsIgnoreCase("invalid")) {
-                            connectThread.getClient().getChatMessanger().output(str.split(";", -1)[1] + "닉네임에 사용할 수 없는 글자가 포함되어 있습니다. (\"Server\", \"null\", \";\", 공백, 줄바꿈 사용 불가)");
-                            connectThread.clearRequestNickname();
-                        } else if (str.split(";", -1)[3].equalsIgnoreCase("number")) {
-                            connectThread.getClient().getChatMessanger().output(str.split(";", -1)[1] + "닉네임은 숫자로만 이루어질 수 없습니다.");
+                            connectThread.getClient().getChatMessanger().output(str.split(";", -1)[1] + "닉네임에 사용할 수 없는 글자가 포함되어 있습니다. (\"Server\", \"null\", \";\", 줄바꿈 사용 불가)");
                             connectThread.clearRequestNickname();
                         } else if (str.split(";", -1)[3].equalsIgnoreCase("already")) {
                             connectThread.getClient().getChatMessanger().output(str.split(";", -1)[1] + "이미 존재하는 닉네임입니다.");

@@ -50,7 +50,9 @@ public class ChatGUI extends JFrame {
         getContentPane().add(sendButton);
         getRootPane().setDefaultButton(sendButton);
         addMouseListener(new ChatGUIMouseListener(this));
+        setLocationRelativeTo(null);
         setVisible(true);
+        inputTextField.requestFocus();
     }
 
     public ClientListScrollPane getClientListScrollPane() {
