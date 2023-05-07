@@ -35,7 +35,7 @@ public class ChatGUI extends JFrame {
         setResizable(false);
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         try {
-            setIconImage(ImageIO.read(Main.class.getResourceAsStream("/chat.png")));
+            setIconImage(ImageIO.read(Main.class.getResourceAsStream("/resources/chat.png")));
         } catch (IOException e) {
         }
         getContentPane().setBackground(Color.DARK_GRAY);
