@@ -22,7 +22,7 @@ public class ServerHostThread extends Thread {
     private HashMap<Socket, ServerInputThread> inputThreads = new HashMap<Socket, ServerInputThread>();
     private HashMap<Socket, ServerOutputThread> outputThreads = new HashMap<Socket, ServerOutputThread>();
     private HashMap<Socket, String> nicknameMap = new HashMap<Socket, String>();
-    private HashMap<String, String> nicknamePasswordMap = new HashMap<String, String>();
+    // private HashMap<String, String> nicknamePasswordMap = new HashMap<String, String>();
     private ArrayList<String> chatRecord = new ArrayList<String>();
 
     public ServerHostThread(Server server) {
@@ -64,11 +64,17 @@ public class ServerHostThread extends Thread {
     }
 
     public void disconnect(Socket socket) {
-        server.getChatMessanger().output(ChatMessangerTimeStamp.getTimeStamp() + getNickname(socket) + "(IP 주소: " + socket.getInetAddress().getHostAddress() + "): 연결 종료됨");
-        sendDisconnectInfo(getNickname(socket), socket);
-        removeIOThread(socket);
-        removeNickname(socket);
-        socketList.remove(socket);
+        if (getNickname(socket) != null) {
+            server.getChatMessanger().output(ChatMessangerTimeStamp.getTimeStamp() + getNickname(socket) + "(IP 주소: " + socket.getInetAddress().getHostAddress() + "): 연결 종료됨");
+            sendDisconnectInfo(getNickname(socket), socket);
+            removeIOThread(socket);
+            removeNickname(socket);
+            socketList.remove(socket);
+        } else {
+            server.getChatMessanger().output(ChatMessangerTimeStamp.getTimeStamp() + "null(IP 주소: " + socket.getInetAddress().getHostAddress() + "): 연결 종료됨");
+            removeIOThread(socket);
+            socketList.remove(socket);
+        }
     }
 
     public void sendChat(String str) {
@@ -169,10 +175,9 @@ public class ServerHostThread extends Thread {
     public boolean hasNickname(Socket socket) {
         return nicknameMap.keySet().contains(socket);
     }
-
-    public void setPassword(String nickname, String password) {
-        nicknamePasswordMap.put(nickname, password);
-    }
+    // public void setPassword(String nickname, String password) {
+    // nicknamePasswordMap.put(nickname, password);
+    // }
 
     private void removeIOThread(Socket socket) {
         inputThreads.get(socket).interrupt();
