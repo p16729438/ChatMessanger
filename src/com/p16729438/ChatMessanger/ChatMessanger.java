@@ -74,6 +74,7 @@ public class ChatMessanger {
                 }
             }
         } catch (IndexOutOfBoundsException | IOException | NumberFormatException e) {
+            output("버전 확인 중에 오류가 발생했습니다.");
             e.printStackTrace();
             return false;
         }
